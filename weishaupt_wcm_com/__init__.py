@@ -1,0 +1,1 @@
+name = "Weishaupt WCM-COM"

@@ -3,19 +3,45 @@ import json
 from requests.auth import HTTPDigestAuth
 
 ENDPOINT = "/parameter.json"
-QUERYTELEGRAM = '{"prot":"coco","telegramm":[[10,0,1,3793,0,0,0,0]]}'
+QUERYTELEGRAM = (
+    '{"prot":"coco","telegramm":[[10,0,1,3793,0,0,0,0],[10,0,1,12,0,0,0,0]]}'
+)
+
+VALUE = 1
+TEMP = 2
+
+# ID, Name, Value/Temp
+QUERIES = [[3793, "Oil Consumption", VALUE], [12, "Outside Temperature", TEMP]]
 
 
-OILCONSUMTION_ID = 3793
-OILCONSUMPTION_KEY = "Oil Consumption"
+
+def getTemperture(lowByte, highByte):
+    return (lowByte + 265 * highByte) / 10
+
+
+def getValue(lowByte, highByte):
+    return lowByte + 265 * highByte
+
 
 def process_values(server, username, password):
-        req = requests.post(server + ENDPOINT, auth=HTTPDigestAuth(username, password), data=QUERYTELEGRAM)
-
-        telegram = json.loads(req.text)['telegramm']
+    try:
+        req = requests.post(
+            "http://" + server + ENDPOINT,
+            auth=HTTPDigestAuth(username, password),
+            data=QUERYTELEGRAM,
+        )
+        telegram = json.loads(req.text)["telegramm"]
         result = {}
-        for reading in telegram:
-                if reading[3] == OILCONSUMTION_ID:
-                        result[OILCONSUMPTION_KEY] = reading[6]
+        for message in telegram:
+            for reading in QUERIES:
+                print(reading)
+                if message[3] == reading[0]:
+                    if reading[2] == TEMP:
+                        result[reading[1]] = getTemperture(message[6], message[7])
+                    else:
+                        result[reading[1]] = getValue(message[6], message[7])
         return json.dumps(result)
+    except:
+        print("Error getting readings")
+        return None
 

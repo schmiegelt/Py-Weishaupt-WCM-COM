@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="weishaupt-wcm-com",
-    version="0.0.6",
+    version="0.0.7",
     author="Philip Schmiegelt",
     author_email="philip@schmiegelt.it",
     description="Interfacing the Weishaupt WCM-COM module",

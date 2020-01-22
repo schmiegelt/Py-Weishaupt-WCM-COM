@@ -11,7 +11,7 @@ VALUE = 1
 TEMP = 2
 
 # ID, Name, Value/Temp
-QUERIES = [[3793, "Oil Consumption", VALUE], [12, "Outside Temperature", TEMP]]
+QUERIES = [[3793, "Oil Meter", VALUE], [12, "Outside Temperature", TEMP]]
 
 
 

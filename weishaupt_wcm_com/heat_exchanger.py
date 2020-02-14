@@ -34,7 +34,7 @@ def process_values(server, username, password):
         result = {}
         for message in telegram:
             for reading in QUERIES:
-                print(reading)
+                # print(reading)
                 if message[3] == reading[0]:
                     if reading[2] == TEMP:
                         result[reading[1]] = getTemperture(message[6], message[7])

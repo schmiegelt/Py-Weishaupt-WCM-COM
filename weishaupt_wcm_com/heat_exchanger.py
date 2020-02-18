@@ -4,14 +4,14 @@ from requests.auth import HTTPDigestAuth
 
 ENDPOINT = "/parameter.json"
 QUERYTELEGRAM = (
-    '{"prot":"coco","telegramm":[[10,0,1,3793,0,0,0,0],[10,0,1,12,0,0,0,0]]}'
+    '{"prot":"coco","telegramm":[[10,0,1,3793,0,0,0,0],[10,0,1,12,0,0,0,0],[10,0,1,14,0,0,0,0],[10,0,1,3101,0,0,0,0],[10,0,1,325,0,0,0,0],[10,0,1,3197,0,0,0,0]]}'
 )
 
 VALUE = 1
 TEMP = 2
 
 # ID, Name, Value/Temp
-QUERIES = [[3793, "Oil Meter", VALUE], [12, "Outside Temperature", TEMP]]
+QUERIES = [[3793, "Oil Meter", VALUE], [3197, "Load Setting", VALUE], [12, "Outside Temperature", TEMP], [14, "Warm Water Temperature", TEMP], [3101, "Flow Temperature", TEMP], [325, "Flue Gas Temperature", TEMP]]
 
 
 

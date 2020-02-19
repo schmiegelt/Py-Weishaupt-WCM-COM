@@ -4,7 +4,7 @@ from requests.auth import HTTPDigestAuth
 
 ENDPOINT = "/parameter.json"
 QUERYTELEGRAM = (
-    '{"prot":"coco","telegramm":[[10,0,1,3793,0,0,0,0],[10,0,1,12,0,0,0,0],[10,0,1,14,0,0,0,0],[10,0,1,3101,0,0,0,0],[10,0,1,325,0,0,0,0],[10,0,1,3197,0,0,0,0]]}'
+    '{"prot":"coco","telegramm":[[10,0,1,3793,0,0,0,0],[10,0,1,3792,0,0,0,0],[10,0,1,12,0,0,0,0],[10,0,1,14,0,0,0,0],[10,0,1,3101,0,0,0,0],[10,0,1,325,0,0,0,0],[10,0,1,3197,0,0,0,0]]}'
 )
 
 VALUE = 1
@@ -40,6 +40,9 @@ def process_values(server, username, password):
                         result[reading[1]] = getTemperture(message[6], message[7])
                     else:
                         result[reading[1]] = getValue(message[6], message[7])
+            # special handling for oil meter
+            if message[3] == 3792:
+                result["Oil Meter"] = result["Oil Meter"]+message[6]*1000
         return json.dumps(result)
     except:
         print("Error getting readings")

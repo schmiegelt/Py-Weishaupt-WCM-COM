@@ -36,7 +36,7 @@ def process_values(server, username, password):
             "http://" + server + ENDPOINT,
             auth=HTTPDigestAuth(username, password),
             data=QUERYTELEGRAM,
-        )
+            timeout=5)
         telegram = json.loads(req.text)["telegramm"]
         result = {}
         for message in telegram:

@@ -20,8 +20,13 @@ QUERIES = [[3793, "Oil Meter", VALUE], [4176, "Load Setting", DECIMAL_VALUE], [1
 
 
 def getTemperture(lowByte, highByte):
-    return (lowByte + 265 * highByte) / 10
-
+    if highByte<=127:
+        return ((highByte*256) + lowByte)/10
+    else:
+        if ((highByte == 128) and (lowByte == 0)):
+            return ((highByte*256) + lowByte)/10
+        else:
+            return (((-32768)+((highByte-128)*256)+lowByte))/10
 
 def getValue(lowByte, highByte):
     return lowByte + 265 * highByte

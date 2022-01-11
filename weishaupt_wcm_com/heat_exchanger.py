@@ -24,10 +24,10 @@ def getTemperture(lowByte, highByte):
 
 
 def getValue(lowByte, highByte):
-    return lowByte + 265 * highByte
+    return lowByte + 256 * highByte
 
 def getDecimalValue(lowByte, highByte):
-    return (lowByte + 265 * highByte) / 10
+    return (lowByte + 256 * highByte) / 10
 
 
 def process_values(server, username, password):
